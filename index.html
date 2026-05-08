@@ -9,15 +9,17 @@
 
     <meta
       name="description"
-      content="Premier Motors SF LLC offers auto parts, wheels, tires, rims and vehicle accessories with a professional quote-first catalog experience."
+      content="Premier Motors SF LLC offers auto parts, wheels, tires, rims and vehicle accessories through a professional quote-first catalog experience."
     />
 
     <meta
       name="keywords"
-      content="auto parts, wheels, tires, rims, vehicle accessories, Premier Motors SF LLC"
+      content="Premier Motors SF LLC, auto parts, vehicle parts, wheels, tires, rims, brake parts, replacement parts, vehicle accessories"
     />
 
+    <meta name="author" content="Premier Motors SF LLC" />
     <meta name="theme-color" content="#050505" />
+    <meta name="robots" content="index, follow" />
 
     <meta property="og:title" content="Premier Motors SF LLC" />
     <meta
@@ -25,17 +27,35 @@
       content="Auto parts, wheels, tires, rims and vehicle accessories."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Premier Motors SF LLC" />
 
-    <!-- Temporary favicon until you add the real logo -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Premier Motors SF LLC" />
+    <meta
+      name="twitter:description"
+      content="Auto parts, wheels, tires, rims and vehicle accessories."
+    />
+
     <link
       rel="icon"
       type="image/svg+xml"
-      href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="22" fill="%23050505"/%3E%3Ctext x="50" y="58" text-anchor="middle" font-size="34" font-family="Arial" font-weight="900" fill="%23f4d58d"%3EPM%3C/text%3E%3C/svg%3E'
+      href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect width="100" height="100" rx="22" fill="%23050505"/%3E%3Ccircle cx="50" cy="50" r="34" fill="none" stroke="%23f4d58d" stroke-width="4"/%3E%3Ctext x="50" y="59" text-anchor="middle" font-size="30" font-family="Arial" font-weight="900" fill="%23f4d58d"%3EPM%3C/text%3E%3C/svg%3E'
     />
   </head>
 
   <body>
+    <!-- Netlify Forms detection fallback -->
+    <form name="quote" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="phone" />
+      <input type="email" name="email" />
+      <input type="text" name="vehicle" />
+      <input type="text" name="category" />
+      <textarea name="message"></textarea>
+    </form>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

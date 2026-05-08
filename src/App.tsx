@@ -6,36 +6,46 @@ type Product = {
   image: string;
   description: string;
   fitment: string;
+  note: string;
 };
 
 type PaymentMethod = {
   name: string;
   label: string;
+  status: string;
+  description: string;
+};
+
+type ProcessStep = {
+  number: string;
+  title: string;
   description: string;
 };
 
 const products: Product[] = [
   {
     id: 1,
-    name: "Performance Tires",
+    name: "All-Season Tires",
     category: "Tires",
     price: "From $120",
     image:
       "https://images.unsplash.com/photo-1600661653561-629509216228?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Reliable tires for everyday driving, highway comfort and performance upgrades.",
-    fitment: "Multiple sizes available",
+      "Daily driving tires for comfort, grip and reliable road performance.",
+    fitment: "Size required",
+    note: "Best for replacements",
   },
   {
     id: 2,
-    name: "Premium Wheels",
+    name: "Custom Wheels",
     category: "Wheels",
     price: "From $450",
     image:
       "https://images.unsplash.com/photo-1603386329225-868f9b1ee6c9?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Clean wheel options for customers looking to upgrade the look and stance of their vehicle.",
-    fitment: "Fitment checked before order",
+      "Wheel options for customers upgrading the look and stance of their vehicle.",
+    fitment: "Bolt pattern checked",
+    note: "Style upgrade",
   },
   {
     id: 3,
@@ -45,30 +55,33 @@ const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Replacement rims and rim sets for damaged, worn or style-upgrade needs.",
-    fitment: "Model-based matching",
+      "Rim replacements and rim sets for damaged, worn or upgraded vehicles.",
+    fitment: "Vehicle model needed",
+    note: "Model-based matching",
   },
   {
     id: 4,
-    name: "Auto Parts",
-    category: "Parts",
-    price: "Available",
-    image:
-      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=80",
-    description:
-      "Vehicle parts, components and accessories for maintenance, repair and upgrades.",
-    fitment: "VIN or model recommended",
-  },
-  {
-    id: 5,
     name: "Brake Components",
     category: "Parts",
     price: "Quote required",
     image:
       "https://images.unsplash.com/photo-1632823471565-1ecdf5c248c8?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Brake-related components for safer driving, repair needs and service preparation.",
-    fitment: "Vehicle details needed",
+      "Brake-related components for safer driving and repair preparation.",
+    fitment: "VIN recommended",
+    note: "Safety parts",
+  },
+  {
+    id: 5,
+    name: "Replacement Parts",
+    category: "Parts",
+    price: "Available",
+    image:
+      "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Automotive parts and components for repair, service and upgrades.",
+    fitment: "Year / make / model",
+    note: "Repair support",
   },
   {
     id: 6,
@@ -78,8 +91,9 @@ const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=1200&q=80",
     description:
-      "Useful add-ons for appearance, utility, comfort and daily vehicle care.",
-    fitment: "Universal and model-specific",
+      "Useful accessories for appearance, daily care, utility and comfort.",
+    fitment: "Universal or specific",
+    note: "Add-on products",
   },
 ];
 
@@ -87,29 +101,64 @@ const paymentMethods: PaymentMethod[] = [
   {
     name: "Stripe",
     label: "Card checkout",
-    description: "Ready structure for secure card payments and checkout sessions.",
+    status: "Ready to connect",
+    description:
+      "Prepared for secure card checkout once Stripe keys and checkout flow are added.",
   },
   {
     name: "Affirm",
     label: "Financing",
-    description: "Catalog positioned around eligible vehicle-related products.",
+    status: "Approval dependent",
+    description:
+      "Page is positioned around vehicle-related products and avoids scooter/e-bike language.",
   },
   {
     name: "Katapult",
-    label: "Lease-to-own ready",
-    description: "Prepared layout for alternative financing options if approved.",
+    label: "Lease-to-own",
+    status: "Optional integration",
+    description:
+      "Layout can support a Katapult button after account approval and credentials.",
   },
 ];
 
-const stats = [
-  ["Product focus", "Parts"],
-  ["Catalog", "Ready"],
-  ["Payments", "Prepared"],
-  ["Mobility type", "Automotive"],
+const processSteps: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Request the part",
+    description:
+      "Customer sends tire size, wheel size, part name, vehicle model or VIN.",
+  },
+  {
+    number: "02",
+    title: "Confirm compatibility",
+    description:
+      "Fitment, availability and product details are reviewed before payment.",
+  },
+  {
+    number: "03",
+    title: "Choose payment",
+    description:
+      "Stripe, Affirm or Katapult can be connected after approval and setup.",
+  },
+  {
+    number: "04",
+    title: "Complete the order",
+    description:
+      "Customer receives next steps for pickup, delivery or confirmation.",
+  },
+];
+
+const highlights = [
+  "Tires",
+  "Wheels",
+  "Rims",
+  "Brake parts",
+  "Replacement parts",
+  "Accessories",
 ];
 
 function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function App() {
@@ -156,22 +205,20 @@ function App() {
       </header>
 
       <main id="home">
-        <section className="hero-section">
+        <section className="hero-section anchor-section">
           <div className="container hero-grid">
             <div className="hero-copy">
               <div className="eyebrow">
                 <span></span>
-                Automotive parts catalog
+                Automotive parts supplier
               </div>
 
-              <h1>
-                A sharper parts store for wheels, tires, rims and vehicle upgrades.
-              </h1>
+              <h1>Parts, wheels, tires and rims for serious vehicle upgrades.</h1>
 
               <p>
-                Premier Motors SF LLC helps customers request vehicle parts, tires,
-                wheels, rims and accessories through a clean, financing-ready catalog
-                experience.
+                Premier Motors SF LLC helps customers request the right automotive
+                parts, confirm fitment and prepare checkout through a professional
+                quote-first catalog.
               </p>
 
               <div className="hero-actions">
@@ -180,73 +227,76 @@ function App() {
                   onClick={() => scrollToId("products")}
                   type="button"
                 >
-                  Explore catalog
+                  Browse catalog
                 </button>
 
                 <button
                   className="btn btn-ghost"
-                  onClick={() => scrollToId("payments")}
+                  onClick={() => scrollToId("contact")}
                   type="button"
                 >
-                  View payment options
+                  Request availability
                 </button>
               </div>
 
               <div className="trust-strip">
-                <span>Quote-first buying</span>
                 <span>Fitment support</span>
-                <span>Finance-ready</span>
+                <span>Quote-first orders</span>
+                <span>Payment-ready structure</span>
               </div>
             </div>
 
             <div className="hero-showcase">
               <div className="showcase-main">
                 <img
-                  src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80"
-                  alt="Premium automotive vehicle"
+                  src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1400&q=80"
+                  alt="Automotive parts and service"
                 />
                 <div className="showcase-overlay" />
 
                 <div className="showcase-card top">
                   <span>01</span>
                   <strong>Parts</strong>
-                  <small>Replacement & upgrade requests</small>
+                  <small>Replacement, repair and upgrade requests</small>
                 </div>
 
                 <div className="showcase-card bottom">
                   <span>02</span>
                   <strong>Wheels + Tires</strong>
-                  <small>Fitment checked before ordering</small>
+                  <small>Fitment reviewed before ordering</small>
                 </div>
               </div>
 
-              <div className="stats-grid">
-                {stats.map(([label, value]) => (
-                  <div className="stat-card" key={label}>
-                    <small>{label}</small>
-                    <strong>{value}</strong>
-                  </div>
-                ))}
+              <div className="hero-mini-panel">
+                <strong>Catalog focus</strong>
+                <span>No scooters, no e-bikes, no electric mobility products.</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="products" className="section">
+        <section id="products" className="section anchor-section">
           <div className="container">
             <div className="section-head">
               <div>
                 <div className="eyebrow">
                   <span></span>
-                  Product categories
+                  Product catalog
                 </div>
-                <h2>Catalog built for automotive parts, not electric mobility.</h2>
+                <h2>Automotive products customers can request with confidence.</h2>
               </div>
 
               <p>
-                The product structure stays focused on vehicle-related items that make
-                sense for parts sales and financing review.
+                The catalog is focused on eligible vehicle-related products: tires,
+                wheels, rims, parts and accessories. No electric scooter or e-bike
+                inventory is included.
               </p>
+            </div>
+
+            <div className="category-strip">
+              {highlights.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
             </div>
 
             <div className="product-grid">
@@ -258,6 +308,7 @@ function App() {
                   <div className="product-image">
                     <img src={product.image} alt={product.name} />
                     <div className="product-category">{product.category}</div>
+                    <div className="product-note">{product.note}</div>
                   </div>
 
                   <div className="product-body">
@@ -287,27 +338,27 @@ function App() {
           </div>
         </section>
 
-        <section id="payments" className="section payment-section">
+        <section id="payments" className="section payment-section anchor-section">
           <div className="container payment-grid">
             <div className="payment-panel">
               <div className="eyebrow">
                 <span></span>
-                Payment infrastructure
+                Payment setup
               </div>
 
-              <h2>Prepared for Stripe, Affirm or Katapult.</h2>
+              <h2>Ready for Stripe, Affirm or Katapult when approved.</h2>
 
               <p>
-                This site is structured so payment methods can be connected later
-                without changing the business focus. The page avoids electric scooters,
-                e-bikes and electric mobility language.
+                Payment buttons can be connected after credentials, merchant approval
+                and checkout rules are ready. The current site keeps the business focus
+                clean for automotive parts and accessories.
               </p>
 
               <div className="payment-warning">
-                <strong>Catalog rule</strong>
+                <strong>Important catalog rule</strong>
                 <span>
-                  Keep products limited to tires, wheels, rims, vehicle parts and
-                  accessories.
+                  Keep the store focused on auto parts, wheels, tires, rims and
+                  accessories. Avoid scooters, e-bikes and electric mobility language.
                 </span>
               </div>
             </div>
@@ -318,6 +369,7 @@ function App() {
                   <div>
                     <span>{method.name}</span>
                     <strong>{method.label}</strong>
+                    <small>{method.status}</small>
                   </div>
                   <p>{method.description}</p>
                 </div>
@@ -326,69 +378,35 @@ function App() {
           </div>
         </section>
 
-        <section id="process" className="section">
+        <section id="process" className="section anchor-section">
           <div className="container process-layout">
             <div className="process-sticky">
               <div className="eyebrow">
                 <span></span>
                 Customer flow
               </div>
-              <h2>Simple quote-first buying experience.</h2>
+              <h2>A simple quote-first buying process.</h2>
               <p>
-                Customers can request what they need first, then the business confirms
-                availability, fitment and payment options before checkout.
+                Instead of forcing a generic checkout, customers can first confirm the
+                correct part, size or fitment before payment.
               </p>
             </div>
 
             <div className="process-list">
-              <div className="process-item">
-                <span>01</span>
-                <div>
-                  <h3>Customer requests item</h3>
-                  <p>
-                    They send the tire size, wheel style, part name, vehicle model or
-                    VIN details.
-                  </p>
+              {processSteps.map((step) => (
+                <div className="process-item" key={step.number}>
+                  <span>{step.number}</span>
+                  <div>
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                  </div>
                 </div>
-              </div>
-
-              <div className="process-item">
-                <span>02</span>
-                <div>
-                  <h3>Fitment is confirmed</h3>
-                  <p>
-                    The correct part, rim, tire size or accessory is checked before
-                    purchase.
-                  </p>
-                </div>
-              </div>
-
-              <div className="process-item">
-                <span>03</span>
-                <div>
-                  <h3>Payment option is selected</h3>
-                  <p>
-                    Stripe, Affirm or Katapult can be connected when the account and
-                    product rules are ready.
-                  </p>
-                </div>
-              </div>
-
-              <div className="process-item">
-                <span>04</span>
-                <div>
-                  <h3>Order is completed</h3>
-                  <p>
-                    Customer receives next steps for pickup, delivery or final order
-                    confirmation.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="about" className="section">
+        <section id="about" className="section anchor-section">
           <div className="container about-card">
             <div>
               <div className="eyebrow">
@@ -400,43 +418,49 @@ function App() {
 
               <p>
                 A professional automotive parts storefront focused on practical vehicle
-                products: replacement parts, tires, wheels, rims and accessories.
+                products, quote requests, fitment help and payment readiness.
               </p>
             </div>
 
             <div className="about-grid">
               <div>
                 <strong>Included</strong>
-                <span>Auto parts, wheels, tires, rims, accessories.</span>
+                <span>Auto parts, wheels, tires, rims and accessories.</span>
               </div>
 
               <div>
                 <strong>Excluded</strong>
-                <span>No electric scooters, no e-bikes, no electric mobility catalog.</span>
+                <span>No electric scooters, no e-bikes and no electric mobility catalog.</span>
               </div>
 
               <div>
                 <strong>Purpose</strong>
-                <span>Quote requests, catalog browsing and payment readiness.</span>
+                <span>Quote requests, catalog browsing and payment preparation.</span>
               </div>
 
               <div>
-                <strong>Customer support</strong>
+                <strong>Support</strong>
                 <span>Help choosing the correct fitment before purchase.</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="contact" className="section contact-section">
+        <section id="contact" className="section contact-section anchor-section">
           <div className="container contact-grid">
             <form
               className="contact-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                alert("Request ready to be connected to email, Netlify Forms or backend.");
+              name="quote"
+              method="POST"
+              data-netlify="true"
+              onSubmit={() => {
+                window.setTimeout(() => {
+                  alert("Request submitted. We will contact you soon.");
+                }, 100);
               }}
             >
+              <input type="hidden" name="form-name" value="quote" />
+
               <div className="eyebrow">
                 <span></span>
                 Request a quote
@@ -445,11 +469,17 @@ function App() {
               <h2>Tell us what your vehicle needs.</h2>
 
               <div className="field-grid">
-                <input className="input" name="name" placeholder="Full name" />
+                <input className="input" name="name" placeholder="Full name" required />
                 <input className="input" name="phone" placeholder="Phone number" />
               </div>
 
-              <input className="input" name="email" placeholder="Email address" />
+              <input
+                className="input"
+                name="email"
+                type="email"
+                placeholder="Email address"
+                required
+              />
 
               <div className="field-grid">
                 <input
@@ -457,13 +487,18 @@ function App() {
                   name="vehicle"
                   placeholder="Vehicle year / make / model"
                 />
-                <input className="input" name="category" placeholder="Part category" />
+                <input
+                  className="input"
+                  name="category"
+                  placeholder="Part category"
+                />
               </div>
 
               <textarea
                 className="input textarea"
                 name="message"
                 placeholder="Example: tire size, wheel size, part name, VIN, or what you need help finding..."
+                required
               />
 
               <button className="btn btn-primary submit-btn" type="submit">
@@ -482,17 +517,17 @@ function App() {
                 <span>Payment readiness</span>
                 <strong>Stripe • Affirm • Katapult</strong>
                 <p>
-                  Payment buttons can be connected after approval, credentials and
+                  Payment methods can be connected after approval, credentials and
                   checkout flow are ready.
                 </p>
               </div>
 
               <div className="side-card highlighted">
-                <span>Important</span>
-                <strong>Affirm-friendly focus</strong>
+                <span>Catalog rule</span>
+                <strong>Automotive only</strong>
                 <p>
-                  Do not add scooters, e-bikes or electric mobility products to this
-                  page.
+                  Keep this page focused on vehicle parts, wheels, tires, rims and
+                  accessories only.
                 </p>
               </div>
             </aside>
